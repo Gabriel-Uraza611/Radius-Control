@@ -164,10 +164,6 @@
                         <plugin>spring</plugin>
                         <plugin>jpa</plugin>
                     </compilerPlugins>
-                    <pluginOptions>
-                        <option>spring:enabled=true</option>
-                        <option>jpa:enabled=true</option>
-                    </pluginOptions>
                 </configuration>
                 <dependencies>
                     <dependency>
