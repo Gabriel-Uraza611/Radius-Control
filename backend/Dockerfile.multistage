@@ -1,0 +1,24 @@
+# Multi-stage build for Radius Control MVP (standalone, no local Maven needed)
+# Más lento la primera vez por descarga de dependencias, pero funciona en cualquier máquina con Docker
+# Uso: docker build -f Dockerfile.multistage -t radiuscontrolmvp-backend .
+
+# Build stage
+FROM maven:3.9.9-eclipse-temurin-21 AS build
+WORKDIR /app
+
+# Copy pom.xml first to cache dependencies
+COPY pom.xml .
+
+# Download dependencies (cached layer if pom.xml doesn't change)
+RUN mvn dependency:go-offline -B
+
+# Copy source and build
+COPY src ./src
+RUN mvn clean package -DskipTests -B
+
+# Runtime stage
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+COPY --from=build /app/target/radius-control-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]

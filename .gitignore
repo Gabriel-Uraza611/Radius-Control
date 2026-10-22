@@ -1,0 +1,44 @@
+# Root .gitignore for RadiusControlMVP
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+target/
+dist/
+build/
+*.class
+*.jar
+*.war
+
+# Coverage
+coverage/
+*.tsbuildinfo
+
+# Docker (keep .dockerignore files, they are needed for builds)
+# .dockerignore
+
+# Frontend specific (also in frontend/.gitignore)
+node_modules/
+.vite/
+*.local
+HELP.md
